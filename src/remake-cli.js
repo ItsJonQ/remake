@@ -37,7 +37,7 @@ program
 
     const remakeOptions = {
       entry: getRelativeRemakePath(props.entry || props.i),
-      output: getRelativePath(props.output || props.o),
+      output: getRelativePath(props.output || props.o, props.name),
       overwrite: props.overwrite || props.w,
       name: props.name || props.n,
       silence: props.silence,

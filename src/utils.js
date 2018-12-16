@@ -159,15 +159,16 @@ export function getFilesFromDirectory(directory) {
 /**
  * Retrieves the relative path of a directory to the project's root path.
  * @param {string} filepath The directory/file path to retrieve against project root.
+ * @param {string} name The name of the directory.
  * @returns {string} The full path relative to the project root.
  */
-export function getRelativePath(filepath) {
-  if (!filepath) return undefined
+export function getRelativePath(filepath, name) {
+  if (!filepath || !name) return undefined
 
   const basePath = getProjectRootPath()
   if (!basePath) return undefined
 
-  return path.resolve(basePath, filepath) || undefined
+  return path.resolve(basePath, filepath, name) || undefined
 }
 
 /**
