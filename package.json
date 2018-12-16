@@ -9,6 +9,7 @@
     "build:js": "zero build",
     "build": "npm run clean && npm run build:js",
     "clean": "rm -rf dist",
+    "precommit": "zero pre-commit",
     "release": "np",
     "version": "npm run build"
   },
