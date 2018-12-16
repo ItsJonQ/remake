@@ -4,6 +4,8 @@
 
 > A simple generator from locally defined templates!
 
+## Table of contents
+
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 
@@ -12,6 +14,7 @@
   - [Create the template files](#create-the-template-files)
   - [Run the command](#run-the-command)
 - [Example](#example)
+- [License](#license)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
@@ -112,3 +115,7 @@ export default Hello
 ## Example
 
 Check out the example in the [`__tests__` directory](https://github.com/ItsJonQ/remake-cli/tree/master/__tests__) 🙌
+
+## License
+
+MIT © [Q](https://jonquach.com)
