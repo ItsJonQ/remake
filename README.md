@@ -9,6 +9,7 @@
 - [Usage](#usage)
   - [Create the template files](#create-the-template-files)
   - [Run the command](#run-the-command)
+- [Example](#example)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
@@ -105,3 +106,7 @@ export class Hello extends React.PureComponent {
 
 export default Hello
 ```
+
+## Example
+
+Check out the example in the [`__tests__` directory](https://github.com/ItsJonQ/remake-cli/tree/master/__tests__) 🙌
