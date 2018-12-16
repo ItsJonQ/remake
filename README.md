@@ -1,5 +1,6 @@
 # 🦋 Remake
 
+[![Build Status](https://travis-ci.org/ItsJonQ/remake-cli.svg?branch=master)](https://travis-ci.org/ItsJonQ/remake-cli)
 [![npm version](https://badge.fury.io/js/remake-cli.svg)](https://badge.fury.io/js/remake-cli)
 
 > A simple generator from locally defined templates!

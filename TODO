@@ -1,4 +1,0 @@
-* [x] Add CLI interface
-* [x] Add entry argument, `-i, --entry`
-* [x] Add output argument, `-o, --output`
-* [x] Add overwrite argument, `-w, --overwrite`
