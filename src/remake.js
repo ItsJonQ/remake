@@ -3,7 +3,7 @@ import {moveAndModifyAllTemplateFiles} from './modify'
 import {dirExists, getRemakePath, getFilesFromDirectory} from './utils'
 
 const defaultOptions = {
-  overwrite: true,
+  overwrite: false,
   props: {},
   silence: false,
 }

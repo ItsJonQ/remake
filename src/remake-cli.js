@@ -24,6 +24,7 @@ program.version(pkg.version)
 program.option('-n, --name', 'The name for the generate file(s)')
 program.option('-o, --output', 'Location to output generated file(s)')
 program.option('-i, --entry', 'Location of the template file(s)')
+program.option('-w, --overwrite', 'Overwrite existing files')
 program.option('-s, --silence', 'Suppresses the logs')
 
 // Commands

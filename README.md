@@ -16,12 +16,13 @@ Usage: remake-cli
 
 
 Options:
-  -V, --version  output the version number
-  -n, --name     The name for the generate file(s)
-  -o, --output   Location to output generated file(s)
-  -i, --entry    Location of the template file(s)
-  -s, --silence  Suppresses the logs
-  -h, --help     output usage information
+  -V, --version    output the version number
+  -n, --name       The name for the generate file(s)
+  -o, --output     Location to output generated file(s)
+  -i, --entry      Location of the template file(s)
+  -w, --overwrite  Overwrite existing files
+  -s, --silence    Suppresses the logs
+  -h, --help       output usage information
 
 Commands:
   *              The directory name for the template under .remake/
