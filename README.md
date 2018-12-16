@@ -48,6 +48,12 @@ Commands:
 npm install --save-dev remake-cli
 ```
 
+To install it globally, run:
+
+```
+npm install -g remake-cli
+```
+
 ## Usage
 
 ### Create the template files
@@ -101,7 +107,23 @@ Notice the `<%= name %>`. Remake uses [lodash.template](https://lodash.com/docs/
 
 ### Run the command
 
-Once you're happy with your template files, run the `remake` command:
+Once you're happy with your template files, run the `remake` command.
+
+The recommended way is to add a `remake` script to your project's `package.json`, like so:
+
+```
+  ...
+  "remake": "remake",
+  ...
+```
+
+You can even add the options to dedicated `remake` scripts for more commonly generated templates:
+
+```
+"remake:component": "remake-cli component --output=src/components"
+```
+
+Alternatively, if you've installed `remake` globally, you can run:
 
 ```
 remake component --name=Hello
