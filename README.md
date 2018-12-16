@@ -1,5 +1,7 @@
 # 🦋 Remake
 
+[![npm version](https://badge.fury.io/js/remake-cli.svg)](https://badge.fury.io/js/remake-cli)
+
 > A simple generator from locally defined templates!
 
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
