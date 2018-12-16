@@ -1,5 +1,7 @@
 import fs from 'fs'
 import path from 'path'
+import pkgUp from 'pkg-up'
+
 export const REMAKE_FILENAME_TOKEN = 'remake-'
 
 /**
@@ -34,6 +36,20 @@ export function dirExists(directory) {
 }
 
 /**
+ * Retrieves the .remake/ directory from the project
+ * @returns {string} The ./remake path
+ */
+export function getRemakePath() {
+  const pkgPath = pkgUp.sync()
+  if (!pkgPath) return null
+
+  const projectPath = path.dirname(pkgPath)
+  const remakeDirPath = path.join(projectPath, '.remake')
+
+  return remakeDirPath
+}
+
+/**
  * Replaces the remake filename token from a filename with the matching prop
  * value, if applicable.
  * @param filename {string} The filename to parse.
@@ -64,7 +80,7 @@ export function flattenDeep(array) {
   return array.reduce(
     (acc, val) =>
       Array.isArray(val) ? acc.concat(flattenDeep(val)) : acc.concat(val),
-    []
+    [],
   )
 }
 
@@ -109,7 +125,7 @@ export function flattenWalkResults(walkResults) {
         return [...collection, flattenWalkResults(result.files)]
       }
       return [...collection, result]
-    }, [])
+    }, []),
   )
 }
 

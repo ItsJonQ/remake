@@ -1,7 +1,7 @@
 import fs from 'fs'
 import path from 'path'
-const template = require('lodash.template')
-const mkdirp = require('mkdirp')
+import template from 'lodash.template'
+import mkdirp from 'mkdirp'
 import {readFile, getFileNameFromProps} from './utils'
 
 /**
@@ -22,7 +22,7 @@ export function getModifiedFileName({src, dest, filepath, props}) {
   const nextFileName = getFileNameFromProps(filename, props)
   const modifiedFileName = path.resolve(
     path.dirname(fileDest),
-    `${nextFileName}.${ext}`
+    `${nextFileName}.${ext}`,
   )
 
   return modifiedFileName
@@ -34,14 +34,23 @@ export function getModifiedFileName({src, dest, filepath, props}) {
  * @param filepath {string} The filepath to modify.
  * @param dest {string} The destination to write the file.
  * @param props {Object} The props to use in the template.
+ * @param overwrite {boolean} The option to overwrite files.
  */
-export function moveAndModifyTemplateFile({filepath, dest, props}) {
+export function moveAndModifyTemplateFile({filepath, dest, props, overwrite}) {
   const nextDir = path.dirname(dest)
   const data = readFile(filepath)
   const nextData = template(data)(props)
 
+  const writeOptions = {
+    encoding: 'utf8',
+  }
+
+  if (overwrite) {
+    writeOptions.flag = 'w'
+  }
+
   mkdirp(nextDir, () => {
-    fs.writeFileSync(dest, nextData)
+    fs.writeFileSync(dest, nextData, writeOptions)
   })
 }
 
@@ -52,14 +61,22 @@ export function moveAndModifyTemplateFile({filepath, dest, props}) {
  * @param dest {string} The destination to write the file.
  * @param files {Array<string>} The collection of files to modify.
  * @param props {Object} The props to use in the template.
+ * @param overwrite {boolean} The option to overwrite files.
  */
-export function moveAndModifyAllTemplateFiles({src, dest, files, props}) {
+export function moveAndModifyAllTemplateFiles({
+  src,
+  dest,
+  files,
+  props,
+  overwrite,
+}) {
   files.forEach(file => {
     const modifiedFileName = getModifiedFileName({
       src,
       dest,
       filepath: file,
       props,
+      overwrite,
     })
     moveAndModifyTemplateFile({filepath: file, dest: modifiedFileName, props})
   })

@@ -1,15 +1,29 @@
 import path from 'path'
-import pkgUp from 'pkg-up'
-import minimist from 'minimist'
 import {moveAndModifyAllTemplateFiles} from './modify'
-import {dirExists, getCommand, getFilesFromDirectory} from './utils'
+import {dirExists, getRemakePath, getFilesFromDirectory} from './utils'
 
-async function remake() {
-  const pkgPath = await pkgUp()
-  const projectPath = path.dirname(pkgPath)
-  const remakeDirPath = path.join(projectPath, '.remake')
-  const args = minimist(process.argv.slice(2))
-  const command = getCommand(args)
+const defaultOptions = {
+  overwrite: true,
+  props: {},
+}
+
+/**
+ * Generates files from a ./remake directory within the project
+ * @param options {Object} The options for Reamke.
+ * @param command {string} The command for Remake.
+ * @param name {string} The name of the template.
+ * @param entry {string} The location of the file(s).
+ * @param output {string} The location to write the file(s).
+ * @param props {Object} Props for the template.
+ * @param overwrite {boolean} To overwrite the files.
+ */
+async function remake(options) {
+  const {command, name, entry, output, overwrite, props} = {
+    ...defaultOptions,
+    ...options,
+  }
+
+  const remakeDirPath = getRemakePath()
 
   if (!command) {
     console.log('Please provide the name of template, like:')
@@ -24,17 +38,15 @@ async function remake() {
   }
 
   // Name is required!
-  const {name} = args
   if (!name) {
     console.log('Please provide a name. You can do it like:')
     console.log('--name=MyReactComponent or --name MyReactComponent')
     return
   }
 
-  const {_, ...props} = args
   const cwd = process.cwd()
-  const remakeTargetDir = path.resolve(remakeDirPath, command)
-  const dest = path.resolve(cwd, name)
+  const remakeTargetDir = entry || path.resolve(remakeDirPath, command)
+  const dest = output || path.resolve(cwd, name)
 
   if (!dirExists(remakeTargetDir)) {
     console.log(`We can't find the .remake/${command} directory.`)
@@ -50,6 +62,7 @@ async function remake() {
     dest,
     files,
     props,
+    overwrite,
   })
 }
 
