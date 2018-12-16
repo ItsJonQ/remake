@@ -5,8 +5,17 @@ import pkgUp from 'pkg-up'
 export const REMAKE_FILENAME_TOKEN = 'remake-'
 
 /**
+ * Checks if a callback is valid
+ * @param {Function} callback The callback to check.
+ * @returns {boolean} The result.
+ */
+export function isCb(callback) {
+  return callback && typeof callback === 'function'
+}
+
+/**
  * Retrieves the command from process args.
- * @param args {Object} The process args defined by Minimist.
+ * @param {Object} args The process args defined by Minimist.
  * @returns {string} The command.
  */
 export function getCommand(args) {
@@ -15,7 +24,7 @@ export function getCommand(args) {
 
 /**
  * Reads the contents of a file.
- * @param filepath {string} The filepath to read.
+ * @param {string} filepath  The filepath to read.
  * @returns {string} The contents of the file.
  */
 export function readFile(filepath) {
@@ -24,10 +33,9 @@ export function readFile(filepath) {
 
 /**
  * Checks to see if the directory exists.
- * @param directory {string} The path of the directory to check.
+ * @param {string} directory The path of the directory to check.
  * @returns {boolean} The result.
  */
-
 export function dirExists(directory) {
   return (
     fs.existsSync(directory) &&
@@ -36,14 +44,24 @@ export function dirExists(directory) {
 }
 
 /**
+ * Retrieves the project's root path.
+ * @returns {string} The project root path.
+ */
+export function getProjectRootPath() {
+  const pkgPath = pkgUp.sync()
+  if (!pkgPath) return null
+
+  return path.dirname(pkgPath)
+}
+
+/**
  * Retrieves the .remake/ directory from the project
  * @returns {string} The ./remake path
  */
 export function getRemakePath() {
-  const pkgPath = pkgUp.sync()
-  if (!pkgPath) return null
+  const projectPath = getProjectRootPath()
+  if (!projectPath) return null
 
-  const projectPath = path.dirname(pkgPath)
   const remakeDirPath = path.join(projectPath, '.remake')
 
   return remakeDirPath
@@ -52,8 +70,8 @@ export function getRemakePath() {
 /**
  * Replaces the remake filename token from a filename with the matching prop
  * value, if applicable.
- * @param filename {string} The filename to parse.
- * @param props {Object} The properties to retrieve matching values from.
+ * @param {string} filename The filename to parse.
+ * @param {Object} props The properties to retrieve matching values from.
  * @returns {string} The updated filename.
  */
 export function getFileNameFromProps(filename, props) {
@@ -86,8 +104,8 @@ export function flattenDeep(array) {
 
 /**
  * Walks through a directory to collect files and directories.
- * @param dir {string} The directory to walk through.
- * @param filelist {Array<any>} The collection of files
+ * @param {string} dir The directory to walk through.
+ * @param {Array<any>} filelist The collection of files
  * @returns {Array<any>} The accumulated collection of files.
  */
 export function walkSync(dir, filelist = []) {
@@ -115,7 +133,7 @@ export function walkSync(dir, filelist = []) {
 
 /**
  * Flattens the walkSync results into a single-level Array.
- * @param walkResults {Array<any>} The walkSync collection to flatten.
+ * @param {Array<any>} walkResults The walkSync collection to flatten.
  * @returns {Array<any>} The flattened walkSync collection.
  */
 export function flattenWalkResults(walkResults) {
@@ -131,9 +149,38 @@ export function flattenWalkResults(walkResults) {
 
 /**
  * Retrieve all files from a directory as a flattened Array collection.
- * @param directory {string} The directory to walk through.
+ * @param {string} directory  The directory to walk through.
  * @returns {Array<any>} The flattened file collection
  */
 export function getFilesFromDirectory(directory) {
   return flattenWalkResults(walkSync(directory)).map(result => result.file)
+}
+
+/**
+ * Retrieves the relative path of a directory to the project's root path.
+ * @param {string} filepath The directory/file path to retrieve against project root.
+ * @returns {string} The full path relative to the project root.
+ */
+export function getRelativePath(filepath) {
+  if (!filepath) return undefined
+
+  const basePath = getProjectRootPath()
+  if (!basePath) return undefined
+
+  return path.resolve(basePath, filepath) || undefined
+}
+
+/**
+ * Retrieves the relative path of a directory to the project's .remake/
+ * directory.
+ * @param {string} filepath The directory/file path to retrieve against .remake/.
+ * @returns {string} The full path relative to the project .remake/.
+ */
+export function getRelativeRemakePath(filepath) {
+  if (!filepath) return undefined
+
+  const remakePath = getRemakePath()
+  if (!remakePath) return undefined
+
+  return path.resolve(remakePath, filepath) || undefined
 }

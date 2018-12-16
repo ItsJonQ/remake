@@ -5,20 +5,22 @@ import {dirExists, getRemakePath, getFilesFromDirectory} from './utils'
 const defaultOptions = {
   overwrite: true,
   props: {},
+  silence: false,
 }
 
 /**
  * Generates files from a ./remake directory within the project
- * @param options {Object} The options for Reamke.
- * @param command {string} The command for Remake.
- * @param name {string} The name of the template.
- * @param entry {string} The location of the file(s).
- * @param output {string} The location to write the file(s).
- * @param props {Object} Props for the template.
- * @param overwrite {boolean} To overwrite the files.
+ * @param {Object} options The options for Reamke.
+ * @param {string} command  The command for Remake.
+ * @param {string} name  The name of the template.
+ * @param {string} entry  The location of the file(s).
+ * @param {string} output  The location to write the file(s).
+ * @param {Object} props  Props for the template.
+ * @param {boolean} silence  Suppresses the logs.
+ * @param {boolean} overwrite  To overwrite the files.
  */
 async function remake(options) {
-  const {command, name, entry, output, overwrite, props} = {
+  const {command, name, entry, output, overwrite, props, silence} = {
     ...defaultOptions,
     ...options,
   }
@@ -54,8 +56,22 @@ async function remake(options) {
     return
   }
 
-  console.log(`Creating a ${command} with the name "${name}"!`)
+  console.log(`📦  Creating a ${command} with the name "${name}"...`)
+  console.log('')
+
   const files = getFilesFromDirectory(remakeTargetDir)
+
+  function onComplete({dest: fileDest}) {
+    if (!silence) {
+      console.log(`   Generated ${fileDest}`)
+    }
+  }
+
+  function onCompleteAll() {
+    console.log('')
+    console.log(`🙌  ${command} generation complete!`)
+    console.log('')
+  }
 
   moveAndModifyAllTemplateFiles({
     src: remakeTargetDir,
@@ -63,6 +79,8 @@ async function remake(options) {
     files,
     props,
     overwrite,
+    onComplete,
+    onCompleteAll,
   })
 }
 

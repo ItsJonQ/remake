@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "remake": "node ../dist/cli.js"
+    "remake": "node ../dist/remake-cli.js"
   },
   "author": "Jon Quach <hello@jonquach.com> (https://jonquach.com)",
   "license": "MIT"

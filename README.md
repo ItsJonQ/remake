@@ -4,6 +4,28 @@
 
 > A simple generator from locally defined templates!
 
+```
+Usage: remake-cli
+  🦋  Remake
+
+  remake <cmd> --option
+
+  Example:
+  remake component --name=MyComponent --someProp=value
+
+
+Options:
+  -V, --version  output the version number
+  -n, --name     The name for the generate file(s)
+  -o, --output   Location to output generated file(s)
+  -i, --entry    Location of the template file(s)
+  -s, --silence  Suppresses the logs
+  -h, --help     output usage information
+
+Commands:
+  *              The directory name for the template under .remake/
+```
+
 ## Table of contents
 
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->

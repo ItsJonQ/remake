@@ -4,13 +4,15 @@
   "private": false,
   "description": "A simple generator from locally defined templates",
   "main": "dist/index.js",
-  "bin": "dist/cli.js",
+  "bin": "dist/remake-cli.js",
   "scripts": {
     "build:js": "zero build",
-    "build": "npm run clean && npm run build:js",
+    "build": "npm run build:js",
     "clean": "rm -rf dist",
     "precommit": "zero pre-commit",
     "release": "np",
+    "test": "npm run remake --prefix __tests__",
+    "test:component": "npm run remake --prefix __tests__ -- component --name=Hello",
     "version": "npm run build"
   },
   "publishConfig": {
