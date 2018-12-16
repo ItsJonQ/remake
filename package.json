@@ -1,0 +1,22 @@
+{
+  "name": "remake-cli",
+  "version": "0.0.1",
+  "description": "",
+  "main": "dist/index.js",
+  "bin": "dist/cli.js",
+  "scripts": {
+    "build": "zero build",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Jon Quach <hello@jonquach.com> (https://jonquach.com)",
+  "license": "MIT",
+  "dependencies": {
+    "lodash.template": "4.4.0",
+    "minimist": "1.2.0",
+    "mkdirp": "0.5.1",
+    "pkg-up": "2.0.0"
+  },
+  "devDependencies": {
+    "@helpscout/zero": "1.0.3"
+  }
+}
