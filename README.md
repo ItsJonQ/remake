@@ -1,6 +1,16 @@
 # 🦋 Remake
 
-> A simple generator from locally defined templates
+> A simple generator from locally defined templates!
+
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+
+- [Installation](#installation)
+- [Usage](#usage)
+  - [Create the template files](#create-the-template-files)
+  - [Run the command](#run-the-command)
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
 ## Installation
 
