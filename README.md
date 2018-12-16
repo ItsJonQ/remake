@@ -1,4 +1,4 @@
-# Remake
+# 🦋 Remake
 
 > A simple generator from locally defined templates
 
