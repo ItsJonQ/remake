@@ -1,6 +1,6 @@
 {
   "name": "remake-cli",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "private": false,
   "description": "A simple generator from locally defined templates",
   "main": "dist/index.js",
