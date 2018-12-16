@@ -4,7 +4,9 @@
   "private": false,
   "description": "A simple generator from locally defined templates",
   "main": "dist/index.js",
-  "bin": "dist/remake-cli.js",
+  "bin": {
+    "remake": "dist/remake-cli.js"
+  },
   "scripts": {
     "build:js": "zero build",
     "build": "npm run build:js",
