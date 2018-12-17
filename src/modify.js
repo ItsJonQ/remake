@@ -19,9 +19,11 @@ export function getModifiedFileName({src, dest, filepath, props}) {
   const ext = rest.join('.')
 
   // Create the next file name
+  const nextFileDest = getFileNameFromProps(fileDest, props)
   const nextFileName = getFileNameFromProps(filename, props)
+
   const modifiedFileName = path.resolve(
-    path.dirname(fileDest),
+    path.dirname(nextFileDest),
     `${nextFileName}.${ext}`,
   )
 
@@ -58,6 +60,7 @@ export function moveAndModifyTemplateFile({
 
   mkdirp.sync(nextDir)
   fs.writeFileSync(dest, nextData, writeOptions)
+
   if (isCb(onComplete)) {
     onComplete({dest, data: nextData})
   }

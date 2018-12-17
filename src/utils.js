@@ -77,15 +77,28 @@ export function getRemakePath() {
 export function getFileNameFromProps(filename, props) {
   if (filename.indexOf(REMAKE_FILENAME_TOKEN) < 0) return filename
 
-  // @ts-ignore
-  // Using REMAKE_FILENAME_TOKEN in the matcher
-  const propToReplace = filename.match(/remake-(\w+)/g)[0]
-  if (!propToReplace) return filename
+  const cwd = process.cwd()
+  const baseFileNames = filename.split(cwd)
+  const isDir = baseFileNames.length > 1
 
+  const baseFileName = isDir
+    ? baseFileNames[baseFileNames.length - 1]
+    : baseFileNames[0]
+
+  if (!baseFileName) return filename
+
+  // Finding any REMAKE_FILENAME_TOKEN
+  const propMatches = baseFileName.match(/remake-(\w+)/g)
+  if (!propMatches) return filename
+
+  // Using REMAKE_FILENAME_TOKEN in the matcher
+  const propToReplace = propMatches[0]
   const prop = props[propToReplace.replace(REMAKE_FILENAME_TOKEN, '')]
   if (!prop) return filename
 
-  return filename.replace(propToReplace, prop)
+  const nextFileName = filename.replace(propToReplace, prop)
+
+  return isDir ? path.resolve(cwd, nextFileName) : nextFileName
 }
 
 /**

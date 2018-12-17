@@ -48,7 +48,7 @@ async function remake(options) {
 
   const cwd = process.cwd()
   const remakeTargetDir = entry || path.resolve(remakeDirPath, command)
-  const dest = output || path.resolve(cwd, name)
+  const dest = output || cwd
 
   if (!dirExists(remakeTargetDir)) {
     console.log(`We can't find the .remake/${command} directory.`)

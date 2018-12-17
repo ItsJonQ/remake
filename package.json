@@ -11,7 +11,6 @@
     "build:js": "zero build",
     "build": "npm run build:js",
     "clean": "rm -rf dist",
-    "precommit": "zero pre-commit",
     "release": "np",
     "test": "npm run remake --prefix __tests__",
     "test:component": "npm run remake --prefix __tests__ -- component --name=Hello",
