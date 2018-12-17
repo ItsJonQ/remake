@@ -81,17 +81,18 @@ Under the new `component` directory, we'll add a couple of files that we want Re
 my-app/
 ├── .remake/
 │   └── component/
-│       ├── index.js
-│       └── remake-name.js
+│       └── remake-name/
+│           ├── index.js
+│           └── remake-name.js
 └── .../
 ```
 
-Notice the `remake-name.js` file. Remake will use `props` you provide to replace any `remake-*` file name. For this example, the file name will be replaced with the `name` prop.
+Notice the `remake-name` directory and `remake-name.js` file. Remake will use `props` you provide to replace any `remake-*` file name. For this example, the file name will be replaced with the `name` prop.
 
 Within the `remake-name.js`, let's add some template content:
 
 ```jsx
-// component/remake-name.js
+// component/remake-name/remake-name.js
 import React from 'react'
 
 export class <%= name %> extends React.PureComponent {
@@ -135,8 +136,9 @@ For this example, remake will generate the following files:
 my-app/
 ├── .remake/
 │   └── component/
-│       ├── index.js
-│       └── remake-name.js
+│       └── remake-name/
+│           ├── index.js
+│           └── remake-name.js
 ├── Hello
 │   ├── index.js
 │   └── Hello.js
