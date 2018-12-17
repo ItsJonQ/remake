@@ -14,8 +14,8 @@
     "precommit": "zero pre-commit",
     "lint": "zero lint",
     "release": "np",
-    "test:remake": "npm run remake --prefix __tests__",
-    "test": "npm run remake --prefix __tests__ -- component --name=Hello",
+    "test:remake": "npm run remake --prefix example",
+    "test": "npm run remake --prefix example -- component --name=Hello",
     "version": "npm run build"
   },
   "publishConfig": {

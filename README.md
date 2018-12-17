@@ -162,7 +162,7 @@ export default Hello
 
 ## Example
 
-Check out the example in the [`__tests__` directory](https://github.com/ItsJonQ/remake-cli/tree/master/__tests__) 🙌
+Check out the example in the [`example` directory](https://github.com/ItsJonQ/remake-cli/tree/master/example) 🙌
 
 ## License
 
