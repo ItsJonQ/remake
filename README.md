@@ -1,12 +1,12 @@
 # 🦋 Remake
 
-[![Build Status](https://travis-ci.org/ItsJonQ/remake-cli.svg?branch=master)](https://travis-ci.org/ItsJonQ/remake-cli)
-[![npm version](https://badge.fury.io/js/remake-cli.svg)](https://badge.fury.io/js/remake-cli)
+[![Build Status](https://travis-ci.org/ItsJonQ/remake.svg?branch=master)](https://travis-ci.org/ItsJonQ/remake)
+[![npm version](https://badge.fury.io/js/remake.svg)](https://badge.fury.io/js/remake)
 
 > A simple generator from locally defined templates!
 
 ```
-Usage: remake-cli
+Usage: remake
   🦋  Remake
 
   remake <cmd> --option
@@ -45,13 +45,13 @@ Commands:
 ## Installation
 
 ```
-npm install --save-dev remake-cli
+npm install --save-dev remake
 ```
 
 To install it globally, run:
 
 ```
-npm install -g remake-cli
+npm install -g remake
 ```
 
 ## Usage
@@ -121,7 +121,7 @@ The recommended way is to add a `remake` script to your project's `package.json`
 You can even add the options to dedicated `remake` scripts for more commonly generated templates:
 
 ```
-"remake:component": "remake-cli component --output=src/components"
+"remake:component": "remake component --output=src/components"
 ```
 
 Alternatively, if you've installed `remake` globally, you can run:
@@ -162,7 +162,7 @@ export default Hello
 
 ## Example
 
-Check out the example in the [`example` directory](https://github.com/ItsJonQ/remake-cli/tree/master/example) 🙌
+Check out the example in the [`example` directory](https://github.com/ItsJonQ/remake/tree/master/example) 🙌
 
 ## License
 

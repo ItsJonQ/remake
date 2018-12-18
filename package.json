@@ -1,11 +1,11 @@
 {
-  "name": "remake-cli",
+  "name": "remake",
   "version": "0.0.7",
   "private": false,
   "description": "A simple generator from locally defined templates",
   "main": "dist/index.js",
   "bin": {
-    "remake": "dist/remake-cli.js"
+    "remake": "dist/remake.js"
   },
   "scripts": {
     "build:js": "zero build",
@@ -30,14 +30,14 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/itsjonq/remake-cli.git"
+    "url": "git+https://github.com/itsjonq/remake.git"
   },
   "bugs": {
-    "url": "https://github.com/itsjonq/remake-cli/issues"
+    "url": "https://github.com/itsjonq/remake/issues"
   },
   "keywords": [
     "remake",
-    "remake-cli",
+    "remake",
     "cli",
     "react-cli",
     "react",

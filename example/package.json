@@ -1,10 +1,10 @@
 {
-  "name": "remake-cli",
+  "name": "remake",
   "version": "0.0.1",
   "description": "",
   "main": "index.js",
   "scripts": {
-    "remake": "node ../dist/remake-cli.js"
+    "remake": "node ../dist/remake.js"
   },
   "author": "Jon Quach <hello@jonquach.com> (https://jonquach.com)",
   "license": "MIT"
