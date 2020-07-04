@@ -1,7 +1,7 @@
 # 🦋 Remake
 
 [![Build Status](https://travis-ci.org/ItsJonQ/remake.svg?branch=master)](https://travis-ci.org/ItsJonQ/remake)
-[![npm version](https://badge.fury.io/js/remake.svg)](https://badge.fury.io/js/remake)
+[![npm version](https://badge.fury.io/js/%40itsjonq%2Fremake.svg)](https://badge.fury.io/js/%40itsjonq%2Fremake)
 
 > A simple generator from locally defined templates!
 
