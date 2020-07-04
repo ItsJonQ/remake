@@ -45,13 +45,13 @@ Commands:
 ## Installation
 
 ```
-npm install --save-dev remake
+npm install --save-dev @itsjonq/remake
 ```
 
 To install it globally, run:
 
 ```
-npm install -g remake
+npm install -g @itsjonq/remake
 ```
 
 ## Usage
