@@ -1,8 +1,8 @@
-import fs from 'fs'
-import path from 'path'
-import pkgUp from 'pkg-up'
+import fs from 'fs';
+import path from 'path';
+import pkgUp from 'pkg-up';
 
-export const REMAKE_FILENAME_TOKEN = 'remake-'
+export const REMAKE_FILENAME_TOKEN = 'remake-';
 
 /**
  * Checks if a callback is valid
@@ -10,7 +10,7 @@ export const REMAKE_FILENAME_TOKEN = 'remake-'
  * @returns {boolean} The result.
  */
 export function isCb(callback) {
-  return callback && typeof callback === 'function'
+	return callback && typeof callback === 'function';
 }
 
 /**
@@ -19,7 +19,7 @@ export function isCb(callback) {
  * @returns {string} The command.
  */
 export function getCommand(args) {
-  return args['_'] && args['_'][0]
+	return args['_'] && args['_'][0];
 }
 
 /**
@@ -28,7 +28,7 @@ export function getCommand(args) {
  * @returns {string} The contents of the file.
  */
 export function readFile(filepath) {
-  return fs.readFileSync(filepath, 'utf8')
+	return fs.readFileSync(filepath, 'utf8');
 }
 
 /**
@@ -37,10 +37,10 @@ export function readFile(filepath) {
  * @returns {boolean} The result.
  */
 export function dirExists(directory) {
-  return (
-    fs.existsSync(directory) &&
-    fs.statSync(path.resolve(directory)).isDirectory()
-  )
+	return (
+		fs.existsSync(directory) &&
+		fs.statSync(path.resolve(directory)).isDirectory()
+	);
 }
 
 /**
@@ -48,10 +48,10 @@ export function dirExists(directory) {
  * @returns {string} The project root path.
  */
 export function getProjectRootPath() {
-  const pkgPath = pkgUp.sync()
-  if (!pkgPath) return null
+	const pkgPath = pkgUp.sync();
+	if (!pkgPath) return null;
 
-  return path.dirname(pkgPath)
+	return path.dirname(pkgPath);
 }
 
 /**
@@ -59,12 +59,12 @@ export function getProjectRootPath() {
  * @returns {string} The ./remake path
  */
 export function getRemakePath() {
-  const projectPath = getProjectRootPath()
-  if (!projectPath) return null
+	const projectPath = getProjectRootPath();
+	if (!projectPath) return null;
 
-  const remakeDirPath = path.join(projectPath, '.remake')
+	const remakeDirPath = path.join(projectPath, '.remake');
 
-  return remakeDirPath
+	return remakeDirPath;
 }
 
 /**
@@ -75,30 +75,30 @@ export function getRemakePath() {
  * @returns {string} The updated filename.
  */
 export function getFileNameFromProps(filename, props) {
-  if (filename.indexOf(REMAKE_FILENAME_TOKEN) < 0) return filename
+	if (filename.indexOf(REMAKE_FILENAME_TOKEN) < 0) return filename;
 
-  const cwd = process.cwd()
-  const baseFileNames = filename.split(cwd)
-  const isDir = baseFileNames.length > 1
+	const cwd = process.cwd();
+	const baseFileNames = filename.split(cwd);
+	const isDir = baseFileNames.length > 1;
 
-  const baseFileName = isDir
-    ? baseFileNames[baseFileNames.length - 1]
-    : baseFileNames[0]
+	const baseFileName = isDir
+		? baseFileNames[baseFileNames.length - 1]
+		: baseFileNames[0];
 
-  if (!baseFileName) return filename
+	if (!baseFileName) return filename;
 
-  // Finding any REMAKE_FILENAME_TOKEN
-  const propMatches = baseFileName.match(/remake-(\w+)/g)
-  if (!propMatches) return filename
+	// Finding any REMAKE_FILENAME_TOKEN
+	const propMatches = baseFileName.match(/remake-(\w+)/g);
+	if (!propMatches) return filename;
 
-  // Using REMAKE_FILENAME_TOKEN in the matcher
-  const propToReplace = propMatches[0]
-  const prop = props[propToReplace.replace(REMAKE_FILENAME_TOKEN, '')]
-  if (!prop) return filename
+	// Using REMAKE_FILENAME_TOKEN in the matcher
+	const propToReplace = propMatches[0];
+	const prop = props[propToReplace.replace(REMAKE_FILENAME_TOKEN, '')];
+	if (!prop) return filename;
 
-  const nextFileName = filename.replace(propToReplace, prop)
+	const nextFileName = filename.replace(propToReplace, prop);
 
-  return isDir ? path.resolve(cwd, nextFileName) : nextFileName
+	return isDir ? path.resolve(cwd, nextFileName) : nextFileName;
 }
 
 /**
@@ -108,11 +108,11 @@ export function getFileNameFromProps(filename, props) {
  * @returns {Array<any>} The flattened array.
  */
 export function flattenDeep(array) {
-  return array.reduce(
-    (acc, val) =>
-      Array.isArray(val) ? acc.concat(flattenDeep(val)) : acc.concat(val),
-    [],
-  )
+	return array.reduce(
+		(acc, val) =>
+			Array.isArray(val) ? acc.concat(flattenDeep(val)) : acc.concat(val),
+		[],
+	);
 }
 
 /**
@@ -122,26 +122,26 @@ export function flattenDeep(array) {
  * @returns {Array<any>} The accumulated collection of files.
  */
 export function walkSync(dir, filelist = []) {
-  const files = fs.readdirSync(dir)
-  for (const file of files) {
-    const dirFile = path.join(dir, file)
-    const dirent = fs.statSync(dirFile)
-    if (dirent.isDirectory()) {
-      const odir = {
-        file: dirFile,
-        files: [],
-      }
-      // @ts-ignore
-      odir.files = walkSync(dirFile, dir.files)
-      filelist.push(odir)
-    } else {
-      filelist.push({
-        file: dirFile,
-      })
-    }
-  }
+	const files = fs.readdirSync(dir);
+	for (const file of files) {
+		const dirFile = path.join(dir, file);
+		const dirent = fs.statSync(dirFile);
+		if (dirent.isDirectory()) {
+			const odir = {
+				file: dirFile,
+				files: [],
+			};
+			// @ts-ignore
+			odir.files = walkSync(dirFile, dir.files);
+			filelist.push(odir);
+		} else {
+			filelist.push({
+				file: dirFile,
+			});
+		}
+	}
 
-  return filelist
+	return filelist;
 }
 
 /**
@@ -150,14 +150,14 @@ export function walkSync(dir, filelist = []) {
  * @returns {Array<any>} The flattened walkSync collection.
  */
 export function flattenWalkResults(walkResults) {
-  return flattenDeep(
-    walkResults.reduce((collection, result) => {
-      if (result.files) {
-        return [...collection, flattenWalkResults(result.files)]
-      }
-      return [...collection, result]
-    }, []),
-  )
+	return flattenDeep(
+		walkResults.reduce((collection, result) => {
+			if (result.files) {
+				return [...collection, flattenWalkResults(result.files)];
+			}
+			return [...collection, result];
+		}, []),
+	);
 }
 
 /**
@@ -166,7 +166,7 @@ export function flattenWalkResults(walkResults) {
  * @returns {Array<any>} The flattened file collection
  */
 export function getFilesFromDirectory(directory) {
-  return flattenWalkResults(walkSync(directory)).map(result => result.file)
+	return flattenWalkResults(walkSync(directory)).map((result) => result.file);
 }
 
 /**
@@ -176,12 +176,12 @@ export function getFilesFromDirectory(directory) {
  * @returns {string} The full path relative to the project root.
  */
 export function getRelativePath(filepath, name = '') {
-  if (!filepath) return undefined
+	if (!filepath) return undefined;
 
-  const basePath = getProjectRootPath()
-  if (!basePath) return undefined
+	const basePath = getProjectRootPath();
+	if (!basePath) return undefined;
 
-  return path.resolve(basePath, filepath, name) || undefined
+	return path.resolve(basePath, filepath, name) || undefined;
 }
 
 /**
@@ -191,10 +191,10 @@ export function getRelativePath(filepath, name = '') {
  * @returns {string} The full path relative to the project .remake/.
  */
 export function getRelativeRemakePath(filepath) {
-  if (!filepath) return undefined
+	if (!filepath) return undefined;
 
-  const remakePath = getRemakePath()
-  if (!remakePath) return undefined
+	const remakePath = getRemakePath();
+	if (!remakePath) return undefined;
 
-  return path.resolve(remakePath, filepath) || undefined
+	return path.resolve(remakePath, filepath) || undefined;
 }

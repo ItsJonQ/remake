@@ -1,8 +1,8 @@
-import fs from 'fs'
-import path from 'path'
-import template from 'lodash.template'
-import mkdirp from 'mkdirp'
-import {readFile, getFileNameFromProps, isCb} from './utils'
+import fs from 'fs';
+import path from 'path';
+import template from 'lodash.template';
+import mkdirp from 'mkdirp';
+import { readFile, getFileNameFromProps, isCb } from './utils';
 
 /**
  * Creates the modified filename based on the dest and props.
@@ -12,22 +12,22 @@ import {readFile, getFileNameFromProps, isCb} from './utils'
  * @param {Object} props The props to use in the template.
  * @returns {string} The modified filename.
  */
-export function getModifiedFileName({src, dest, filepath, props}) {
-  const fileDest = filepath.replace(src, dest)
+export function getModifiedFileName({ src, dest, filepath, props }) {
+	const fileDest = filepath.replace(src, dest);
 
-  const [filename, ...rest] = path.basename(fileDest).split('.')
-  const ext = rest.join('.')
+	const [filename, ...rest] = path.basename(fileDest).split('.');
+	const ext = rest.join('.');
 
-  // Create the next file name
-  const nextFileDest = getFileNameFromProps(fileDest, props)
-  const nextFileName = getFileNameFromProps(filename, props)
+	// Create the next file name
+	const nextFileDest = getFileNameFromProps(fileDest, props);
+	const nextFileName = getFileNameFromProps(filename, props);
 
-  const modifiedFileName = path.resolve(
-    path.dirname(nextFileDest),
-    `${nextFileName}.${ext}`,
-  )
+	const modifiedFileName = path.resolve(
+		path.dirname(nextFileDest),
+		`${nextFileName}.${ext}`,
+	);
 
-  return modifiedFileName
+	return modifiedFileName;
 }
 
 /**
@@ -40,30 +40,30 @@ export function getModifiedFileName({src, dest, filepath, props}) {
  * @param {Function} onComplete Callback when on generated file.
  */
 export function moveAndModifyTemplateFile({
-  filepath,
-  dest,
-  props,
-  overwrite,
-  onComplete,
+	filepath,
+	dest,
+	props,
+	overwrite,
+	onComplete,
 }) {
-  const nextDir = path.dirname(dest)
-  const data = readFile(filepath)
-  const nextData = template(data)(props)
+	const nextDir = path.dirname(dest);
+	const data = readFile(filepath);
+	const nextData = template(data)(props);
 
-  const writeOptions = {
-    encoding: 'utf8',
-  }
+	const writeOptions = {
+		encoding: 'utf8',
+	};
 
-  if (overwrite) {
-    writeOptions.flag = 'w'
-  }
+	if (overwrite) {
+		writeOptions.flag = 'w';
+	}
 
-  mkdirp.sync(nextDir)
-  fs.writeFileSync(dest, nextData, writeOptions)
+	mkdirp.sync(nextDir);
+	fs.writeFileSync(dest, nextData, writeOptions);
 
-  if (isCb(onComplete)) {
-    onComplete({dest, data: nextData})
-  }
+	if (isCb(onComplete)) {
+		onComplete({ dest, data: nextData });
+	}
 }
 
 /**
@@ -78,32 +78,32 @@ export function moveAndModifyTemplateFile({
  * @param {Function} onCompleteAll Callback when on generated all files.
  */
 export function moveAndModifyAllTemplateFiles({
-  src,
-  dest,
-  files,
-  props,
-  overwrite,
-  onComplete,
-  onCompleteAll,
+	src,
+	dest,
+	files,
+	props,
+	overwrite,
+	onComplete,
+	onCompleteAll,
 }) {
-  files.forEach(file => {
-    const modifiedFileName = getModifiedFileName({
-      src,
-      dest,
-      filepath: file,
-      props,
-    })
+	files.forEach((file) => {
+		const modifiedFileName = getModifiedFileName({
+			src,
+			dest,
+			filepath: file,
+			props,
+		});
 
-    moveAndModifyTemplateFile({
-      filepath: file,
-      dest: modifiedFileName,
-      props,
-      overwrite,
-      onComplete,
-    })
-  })
+		moveAndModifyTemplateFile({
+			filepath: file,
+			dest: modifiedFileName,
+			props,
+			overwrite,
+			onComplete,
+		});
+	});
 
-  if (isCb(onCompleteAll)) {
-    onCompleteAll()
-  }
+	if (isCb(onCompleteAll)) {
+		onCompleteAll();
+	}
 }

@@ -1,22 +1,22 @@
 {
-  "name": "remake",
+  "name": "@itsjonq/remake",
   "version": "1.0.0",
   "private": false,
   "description": "A simple generator from locally defined templates",
   "main": "dist/index.js",
   "bin": {
-    "remake": "dist/remake.js"
+    "remake": "dist/remake-cli.js"
   },
   "scripts": {
-    "build:js": "zero build",
-    "build": "npm run build:js",
-    "clean": "rm -rf dist",
+    "build": "zero build",
+    "clean": "zero clean",
     "precommit": "zero pre-commit",
+    "format": "zero format",
     "lint": "zero lint",
-    "release": "np",
+    "release": "zero release",
+    "pretest": "npm run build",
     "test:remake": "npm run remake --prefix example",
-    "test": "npm run remake --prefix example -- component --name=Hello",
-    "version": "npm run build"
+    "test": "npm run remake --prefix example -- component --name=Hello"
   },
   "publishConfig": {
     "access": "public"
@@ -53,7 +53,6 @@
     "pkg-up": "2.0.0"
   },
   "devDependencies": {
-    "@helpscout/zero": "1.0.3",
-    "np": "3.1.0"
+    "@itsjonq/zero": "^4.1.10"
   }
 }

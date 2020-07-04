@@ -1,3 +1,3 @@
-import remake from './remake'
+import remake from './remake';
 
-export default remake
+export default remake;

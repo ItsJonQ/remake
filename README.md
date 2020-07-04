@@ -33,12 +33,12 @@ Commands:
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 
-- [Installation](#installation)
-- [Usage](#usage)
-  - [Create the template files](#create-the-template-files)
-  - [Run the command](#run-the-command)
-- [Example](#example)
-- [License](#license)
+-   [Installation](#installation)
+-   [Usage](#usage)
+    -   [Create the template files](#create-the-template-files)
+    -   [Run the command](#run-the-command)
+-   [Example](#example)
+-   [License](#license)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
@@ -149,15 +149,15 @@ If we take a look at `Hello.js`, you'll see that the `<%= name %>` variables hav
 
 ```jsx
 // Hello/Hello.js
-import React from 'react'
+import React from 'react';
 
 export class Hello extends React.PureComponent {
-  render() {
-    return <div />
-  }
+	render() {
+		return <div />;
+	}
 }
 
-export default Hello
+export default Hello;
 ```
 
 ## Example
