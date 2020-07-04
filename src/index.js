@@ -1,3 +1,3 @@
-import remake from './remake';
+const remake = require('./remake');
 
-export default remake;
+module.exports = remake;

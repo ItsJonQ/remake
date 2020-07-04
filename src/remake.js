@@ -1,6 +1,6 @@
-import path from 'path';
-import { moveAndModifyAllTemplateFiles } from './modify';
-import { dirExists, getRemakePath, getFilesFromDirectory } from './utils';
+const path = require('path');
+const { moveAndModifyAllTemplateFiles } = require('./modify');
+const { dirExists, getRemakePath, getFilesFromDirectory } = require('./utils');
 
 const defaultOptions = {
 	overwrite: false,
@@ -84,4 +84,4 @@ async function remake(options) {
 	});
 }
 
-export default remake;
+module.exports = remake;

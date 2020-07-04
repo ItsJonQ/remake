@@ -1,9 +1,9 @@
 #!/usr/bin/env node
-import program from 'commander';
-import minimist from 'minimist';
-import remake from './remake';
-import pkg from '../package.json';
-import { getRelativeRemakePath, getRelativePath } from './utils';
+const program = require('commander');
+const minimist = require('minimist');
+const remake = require('./remake');
+const pkg = require('../package.json');
+const { getRelativeRemakePath, getRelativePath } = require('./utils');
 
 const args = minimist(process.argv.slice(2));
 

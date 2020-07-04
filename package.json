@@ -3,18 +3,16 @@
   "version": "1.0.0",
   "private": false,
   "description": "A simple generator from locally defined templates",
-  "main": "dist/index.js",
+  "main": "src/index.js",
   "bin": {
-    "remake": "dist/remake-cli.js"
+    "remake": "src/remake-cli.js"
   },
   "scripts": {
-    "build": "zero build",
     "clean": "zero clean",
     "precommit": "zero pre-commit",
     "format": "zero format",
     "lint": "zero lint",
     "release": "zero release",
-    "pretest": "npm run build",
     "test:remake": "npm run remake --prefix example",
     "test": "npm run remake --prefix example -- component --name=Hello"
   },

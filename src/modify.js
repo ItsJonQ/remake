@@ -1,8 +1,8 @@
-import fs from 'fs';
-import path from 'path';
-import template from 'lodash.template';
-import mkdirp from 'mkdirp';
-import { readFile, getFileNameFromProps, isCb } from './utils';
+const fs = require('fs');
+const path = require('path');
+const template = require('lodash.template');
+const mkdirp = require('mkdirp');
+const { readFile, getFileNameFromProps, isCb } = require('./utils');
 
 /**
  * Creates the modified filename based on the dest and props.
@@ -12,7 +12,7 @@ import { readFile, getFileNameFromProps, isCb } from './utils';
  * @param {Object} props The props to use in the template.
  * @returns {string} The modified filename.
  */
-export function getModifiedFileName({ src, dest, filepath, props }) {
+function getModifiedFileName({ src, dest, filepath, props }) {
 	const fileDest = filepath.replace(src, dest);
 
 	const [filename, ...rest] = path.basename(fileDest).split('.');
@@ -39,7 +39,7 @@ export function getModifiedFileName({ src, dest, filepath, props }) {
  * @param {boolean} overwrite The option to overwrite files.
  * @param {Function} onComplete Callback when on generated file.
  */
-export function moveAndModifyTemplateFile({
+function moveAndModifyTemplateFile({
 	filepath,
 	dest,
 	props,
@@ -77,7 +77,7 @@ export function moveAndModifyTemplateFile({
  * @param {Function} onComplete Callback when on generated file.
  * @param {Function} onCompleteAll Callback when on generated all files.
  */
-export function moveAndModifyAllTemplateFiles({
+function moveAndModifyAllTemplateFiles({
 	src,
 	dest,
 	files,
@@ -107,3 +107,9 @@ export function moveAndModifyAllTemplateFiles({
 		onCompleteAll();
 	}
 }
+
+module.exports = {
+	getModifiedFileName,
+	moveAndModifyTemplateFile,
+	moveAndModifyAllTemplateFiles,
+};
